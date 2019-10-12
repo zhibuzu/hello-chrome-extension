@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <div id="main-container">
+        <div id="timestamp_to_datetime">
+            <label class="form_left" for="">时间戳</label>
+            <input id="js_timestamp" class="text" type="text" name="timestamp">
+            <select id="js_timestamp_unit" name="timestamp_unit">
+                <option value="s">秒(s)</option>
+                <option value="ms">毫秒(ms)</option>
+            </select>
+            <button id="js_convert_timestamp" class="convert_button" type="button">转换</button>
+            <input id="js_datetime" class="text" type="text" name="datetime">
+        </div>
+        <div id="datetime_to_timestamp">
+            <label class="form_left" for="">时间</label>
+            <input id="js_datetime_o" class="text" type="text" name="datetime_o">
+            <button id="js_convert_datetime" class="convert_button" type="button">转换</button>
+            <input id="js_timestamp_o" class="text" type="text" name="timestamp_o">
+            <select id="js_timestamp_unit_o" name="timestamp_unit_o">
+                <option value="s">秒(s)</option>
+                <option value="ms">毫秒(ms)</option>
+            </select>
+        </div>
+    </div>
+
+
+    <script src="http://wx.ziizaa.com/Public/sui/js/jquery.min.js?v=2019101103"></script>
+    <script src="http://wx.ziizaa.com/Public/sui/js/jquery.plug.min.js?v=2019101103"></script>
+    <script>
+$(function () {
+            var currentTimestampMS = $.timestamp();
+            var currentDatetime = $.date(currentTimestampMS, "%Y-%m-%d %H:%M:%S");
+            console.log('currentTimeStamp: ' + currentTimestampMS + ' MS');
+            console.log('currentDatetime: ' + currentDatetime);
+
+            var js_timestamp = document.getElementById('js_timestamp');
+            var js_datetime = document.getElementById('js_datetime');
+            var js_timestamp_o = document.getElementById('js_timestamp_o');
+            var js_datetime_o = document.getElementById('js_datetime_o');
+
+            // initialize
+            js_timestamp.value = Math.floor(currentTimestampMS / 1000);
+            js_datetime_o.value = currentDatetime;
+
+            // convert
+            var js_convert_timestamp_btn = document.getElementById('js_convert_timestamp');
+            var js_convert_datetime_btn = document.getElementById('js_convert_datetime');
+            var js_timestamp_unit = document.getElementById('js_timestamp_unit');
+            var js_timestamp_unit_o = document.getElementById('js_timestamp_unit_o');
+            // convert to datetime
+            $(js_convert_timestamp_btn).click(function(e) {
+                console.log('js_timestamp.value: ' + js_timestamp.value);
+                let timestamp_ms = js_timestamp_unit.value == 's' ? js_timestamp.value * 1000 : js_timestamp.value * 1;
+                console.log('timestamp_ms: ' + timestamp_ms);
+                let converted_datetime = $.date(timestamp_ms, "%Y-%m-%d %H:%M:%S");
+                console.log('converted_datetime: ' + converted_datetime);
+                js_datetime.value = converted_datetime;
+            });
+
+            // convert to timestamp
+            $(js_convert_datetime_btn).click(function(e) {
+                let datetime_str = js_datetime_o.value;
+                console.log('datetime_str: ' + datetime_str);
+                let converted_timestamp_ms = $.timestamp(datetime_str);
+                console.log('converted_timestamp: ' + converted_timestamp_ms);
+                let converted_timestamp_value = js_timestamp_unit_o.value == 's' ? Math.floor(converted_timestamp_ms / 1000) : converted_timestamp_ms;
+                js_timestamp_o.value = converted_timestamp_value;
+            });
+        });
+    </script>
+</body>
+</html>

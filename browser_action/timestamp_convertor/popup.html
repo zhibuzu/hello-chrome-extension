@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #main-container {
+            width: max-content;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="main-container">
+        <p>
+            <label class="form_left" for="">时间戳</label>
+            <input id="js_timestamp" class="text" type="text" name="timestamp">
+            <select id="js_timestamp_unit" name="timestamp_unit">
+                <option value="s">秒(s)</option>
+            </select>
+            <button id="js_convert_timestamp" class="convert_button" type="button">转换</button>
+            <input id="js_datetime" class="text" type="text" name="datetime">
+        </p>
+        <p>
+            <label class="form_left" for="">时间</label>
+            <input id="js_datetime_o" class="text" type="text" name="datetime_o">
+            <button id="js_convert_datetime" class="convert_button" type="button">转换</button>
+            <input id="js_timestamp_o" class="text" type="text" name="timestamp_o">
+            <select id="js_timestamp_unit_o" name="timestamp_unit_o">
+                <option value="s">秒(s)</option>
+            </select>
+        </p>
+    </div>
+
+
+    <script src="jquery.js"></script>
+    <script src="timestamp_convert.js"></script>
+    <script src="popup.js"></script>
+</body>
+</html>
