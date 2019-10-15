@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+body {
+    background: aliceblue;
+    border: 5px solid #607D8B;
+    margin: 0;
+}
+#main-container {
+    width: max-content;
+    margin: 0px;
+}
+#language_section {
+    text-align: right;
+    margin: 15px 20px -5px;
+}
+
+label.form_left {
+    font-weight: 500;
+    width: 70px;
+    display: inline-block;
+    text-align: center;
+    font-size: 13px;
+}
+
+input#js_timestamp {height: 20px;font-size: 13px;}
+
+select#js_timestamp_unit {
+    height: 25px;
+    display: inline-block;
+}
+
+button#js_convert_timestamp {
+    height: 25px;
+    font-weight: 600;
+}
+
+input#js_datetime {
+    height: 20px;
+    font-size: 13px;
+}
+
+input#js_datetime_o {
+    height: 20px;
+    font-size: 13px;
+}
+
+button#js_convert_datetime {
+    height: 25px;
+    font-weight: 600;
+}
+
+input#js_timestamp_o {
+    height: 20px;
+    font-size: 13px;
+}
+
+select#js_timestamp_unit_o {
+    height: 25px;
+}
+
+p {
+    margin: 20px;
+}
+    </style>
+</head>
+<body>
+    <div id="main-container">
+        <p id="language_section">
+            <select id="js_language_selector" name="language_selector">
+                <option value="en">English</option>
+                <option value="zh">中文简体</option>
+            </select>
+        </p>
+        <p>
+            <label class="form_left" for="" translate_id="timestamp">Timestamp</label>
+            <input id="js_timestamp" class="text" type="text" name="timestamp">
+            <select id="js_timestamp_unit" name="timestamp_unit">
+                <option value="s" translate_id="second">Second(s)</option>
+            </select>
+            <button id="js_convert_timestamp" class="convert_button" type="button" translate_id="convert">Convert</button>
+            <input id="js_datetime" class="text" type="text" name="datetime">
+        </p>
+        <p>
+            <label class="form_left" for="" translate_id="datetime">Datetime</label>
+            <input id="js_datetime_o" class="text" type="text" name="datetime_o">
+            <button id="js_convert_datetime" class="convert_button" type="button" translate_id="convert">Convert</button>
+            <input id="js_timestamp_o" class="text" type="text" name="timestamp_o">
+            <select id="js_timestamp_unit_o" name="timestamp_unit_o">
+                <option value="s" translate_id="second">Second(s)</option>
+            </select>
+        </p>
+    </div>
+
+
+    <script src="jquery.js"></script>
+    <script src="timestamp_convert.js"></script>
+    <script src="language.js"></script>
+    <script src="popup.js"></script>
+</body>
+</html>

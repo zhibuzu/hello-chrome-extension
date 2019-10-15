@@ -6,24 +6,30 @@
 </head>
 <body>
     <div id="main-container">
+        <div id="language_section">
+            <select id="js_language_selector" name="language_selector">
+                <option value="en">English</option>
+                <option value="zh">中文简体</option>
+            </select>
+        </div>
         <div id="timestamp_to_datetime">
-            <label class="form_left" for="">时间戳</label>
+            <label class="form_left" for="" translate_id="timestamp">Timestamp</label>
             <input id="js_timestamp" class="text" type="text" name="timestamp">
             <select id="js_timestamp_unit" name="timestamp_unit">
-                <option value="s">秒(s)</option>
-                <option value="ms">毫秒(ms)</option>
+                <option value="s" translate_id="second">Second(s)</option>
+                <option value="ms" translate_id="milisecond">MiliSecond(ms)</option>
             </select>
-            <button id="js_convert_timestamp" class="convert_button" type="button">转换</button>
+            <button id="js_convert_timestamp" class="convert_button" type="button" translate_id="convert">Convert</button>
             <input id="js_datetime" class="text" type="text" name="datetime">
         </div>
         <div id="datetime_to_timestamp">
-            <label class="form_left" for="">时间</label>
+            <label class="form_left" for="" translate_id="datetime">Datetime</label>
             <input id="js_datetime_o" class="text" type="text" name="datetime_o">
-            <button id="js_convert_datetime" class="convert_button" type="button">转换</button>
+            <button id="js_convert_datetime" class="convert_button" type="button" translate_id="convert">Convert</button>
             <input id="js_timestamp_o" class="text" type="text" name="timestamp_o">
             <select id="js_timestamp_unit_o" name="timestamp_unit_o">
-                <option value="s">秒(s)</option>
-                <option value="ms">毫秒(ms)</option>
+                <option value="s" translate_id="second">Second(s)</option>
+                <option value="ms" translate_id="milisecond">MiliSecond(ms)</option>
             </select>
         </div>
     </div>
@@ -71,6 +77,46 @@ $(function () {
                 let converted_timestamp_value = js_timestamp_unit_o.value == 's' ? Math.floor(converted_timestamp_ms / 1000) : converted_timestamp_ms;
                 js_timestamp_o.value = converted_timestamp_value;
             });
+
+            // focus on input
+            $(js_datetime).focus(function(e) {
+                e.target.select();
+            });
+
+            $(js_timestamp_o).focus(function(e) {
+                e.target.select();
+            });
+
+            // translate
+            var language_env = 'en';
+            var language_dict = {
+                "en": {
+                    "timestamp": "Timestamp",
+                    "datetime": "Datetime",
+                    "second": "Second(s)",
+                    "milisecond": "Milisecond(ms)",
+                    "convert": "Convert"
+                },
+                "zh": {
+                    "timestamp": "时间戳",
+                    "datetime": "时间",
+                    "second": "秒(s)",
+                    "milisecond": "毫秒(ms)",
+                    "convert": "转换"
+                }
+            };
+            
+    $('#js_language_selector').change(function(e) {
+        language_env = e.target.value;
+        console.log(language_env);
+        $("[translate_id]").each(function (index, item) {
+            let translate_id = $(item).attr('translate_id');
+            console.log(translate_id);
+            let translate_dest = language_dict[language_env][translate_id];
+            console.log(translate_dest);
+            item.textContent = translate_dest;
+        });
+    });
         });
     </script>
 </body>

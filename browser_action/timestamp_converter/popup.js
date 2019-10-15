@@ -38,4 +38,37 @@ $(function () {
                 console.log('converted_timestamp_value: ' + converted_timestamp_value);
                 js_timestamp_o.value = converted_timestamp_value;
             });
+
+            // setting page language
+            let setting_page_lang = function () {
+                chrome.storage.sync.get('language_env', function(data) {
+                    let language_env = data.language_env;
+                    console.log(data.language_env);
+                    document.getElementById('js_language_selector').value = language_env;
+                    $("[translate_id]").each(function (index, item) {
+                        let translate_id = $(item).attr('translate_id');
+                        console.log(translate_id);
+                        let translate_dest = language_dict[language_env][translate_id];
+                        console.log(translate_dest);
+                        item.textContent = translate_dest;
+                    });
+                });
+            };
+            setting_page_lang(); // init page
+            // set && get language_env
+            $('#js_language_selector').change(function(e) {
+                let lang_env = e.target.value;
+                chrome.storage.sync.set({language_env: lang_env}, function() {
+                    setting_page_lang();
+                });
+            });
+
+            // selected when focus
+            $(js_datetime).focus(function(e) {
+                e.target.select();
+            });
+
+            $(js_timestamp_o).focus(function(e) {
+                e.target.select();
+            });
         });
